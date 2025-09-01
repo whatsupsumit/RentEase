@@ -8,30 +8,95 @@ RentEase is a sleek, minimal, peer-to-peer rental platform designed for the Indi
 
 
 
-# Project Setup
+# RentEase Frontend
 
-This repository contains a web application built with React, Vite, and Firebase. It provides a platform for listing and browsing items for rent.
+React-based frontend for the RentEase rental platform.
+
+## Tech Stack
+
+- **React 18** with Vite build tool
+- **Redux Toolkit** for state management
+- **React Query** for server state
+- **Tailwind CSS** + Radix UI components
+- **React Router DOM** for routing
+- **React Hook Form** + Zod validation
+- **Framer Motion** for animations
 
 ## Getting Started
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### Prerequisites
+- Node.js 16+ and npm
 
-## Features
+### Installation
+```bash
+npm install
+```
 
-- Browse and list items for rent
-- User authentication
-- Responsive design
+### Environment Setup
+Copy `.env.sample` to `.env` and configure:
+```bash
+cp .env.sample .env
+```
 
-## License
+Update `.env` with your Django backend URL:
+```
+VITE_API_BASE_URL=http://localhost:8000/api
+```
 
-See LICENSE file for details.
+### Development
+```bash
+npm run dev
+```
+Runs on `http://localhost:5173`
+
+### Build
+```bash
+npm run build
+```
+
+### Preview Production Build
+```bash
+npm run preview
+```
+
+## API Integration
+
+The frontend expects a Django REST API backend with these endpoints:
+
+### Authentication
+- `POST /api/auth/register/` - User registration
+- `POST /api/auth/login/` - User login (returns JWT tokens)
+- `POST /api/auth/logout/` - User logout
+
+### Houses/Rentals
+- `GET /api/houses/` - List all houses
+- `POST /api/houses/` - Create new house listing
+- `GET /api/houses/{id}/` - Get specific house
+- `DELETE /api/houses/{id}/` - Delete house
+
+## Project Structure
+
+```
+src/
+├── components/         # Reusable UI components
+├── pages/             # Page components
+├── hooks/             # Custom React hooks
+├── service/           # API service layer
+├── store/             # Redux store and reducers
+├── context/           # React context providers
+├── lib/               # Utility functions
+└── assets/            # Static assets
+```
+
+## Key Features
+
+- JWT-based authentication
+- Responsive design with Tailwind CSS
+- Form validation with React Hook Form + Zod
+- Image handling and upload
+- Interactive maps with Leaflet
+- Toast notifications
+- Theme switching support
 
 - **Home**: `/` - RentEase landing page
 - **Browse Rentals**: `/browse` - Explore all available rentals (houses, vehicles, electronics, etc.)
