@@ -1,43 +1,55 @@
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDocs,
-} from "firebase/firestore";
-import { db } from "./firebase-config";
-
-const houseListRef = collection(db, "house");
+import apiCall from './api';
 
 export const fetchHouseList = async () => {
-  const houseListSnapshot = await getDocs(houseListRef);
-  const houseListData = houseListSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
-  return houseListData;
+  try {
+    const response = await apiCall('/houses/');
+    return response.results || response; // Handle paginated or direct response
+  } catch (error) {
+    console.error('Error fetching house list:', error);
+    throw error;
+  }
 };
 
 export const fetchHouseById = async (id) => {
-  const houseSnapshot = await getDocs(houseListRef);
-  const houseData = houseSnapshot.docs
-    .map((doc) => ({ id: doc.id, ...doc.data() }))
-    .find((house) => house.id === id);
-  return houseData;
+  try {
+    const response = await apiCall(`/houses/${id}/`);
+    return response;
+  } catch (error) {
+    console.error('Error fetching house by ID:', error);
+    throw error;
+  }
 };
 
 export const createNewHouse = async (houseData, houseImages) => {
-  const newHouseData = {
-    ...houseData,
-    features: [houseData.feature1, houseData.feature2, houseData.feature2],
-    houseImages,
-  };
-  console.log(newHouseData);
-  const newHouseRef = await addDoc(houseListRef, newHouseData);
-  return newHouseRef;
+  try {
+    const newHouseData = {
+      ...houseData,
+      features: [houseData.feature1, houseData.feature2, houseData.feature3].filter(Boolean),
+      house_images: houseImages,
+    };
+    
+    console.log('Creating house:', newHouseData);
+    
+    const response = await apiCall('/houses/', {
+      method: 'POST',
+      body: JSON.stringify(newHouseData),
+    });
+    
+    return response;
+  } catch (error) {
+    console.error('Error creating house:', error);
+    throw error;
+  }
 };
 
 export const deleteHouse = async (id) => {
-  const houseRef = doc(db, "house", id);
-  await deleteDoc(houseRef);
+  try {
+    await apiCall(`/houses/${id}/`, {
+      method: 'DELETE',
+    });
+    return true;
+  } catch (error) {
+    console.error('Error deleting house:', error);
+    throw error;
+  }
 };

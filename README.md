@@ -6,28 +6,32 @@ RentEase is a sleek, minimal, peer-to-peer rental platform designed for the Indi
 
 ## Features
 
-- **Peer-to-Peer Rentals**: List and rent homes, vehicles, electronics, and more across India.
-- **Modern Indian UI**: Minimal, boxy layouts with black/gray and yellow (#FFD700) theme, using Inter, JetBrains Mono, and Space Grotesk fonts.
-- **Rupee Pricing**: All prices and transactions are in ₹ (INR), with Indian cities and categories.
-- **Booking System**: Effortlessly book rentals with a streamlined process.
-- **Admin Dashboard**: Manage your listings, bookings, and earnings.
-- **Map Integration**: View property and item locations on an interactive map.
-- **Secure Payments**: Integrated payment system for booking confirmation.
-- **Accessibility**: High-contrast, responsive, and accessible design for all users.
-- **Authentication**: Secure login and sign-up with Firebase.
 
 
-## Tech Stack
+# Project Setup
 
-- **Frontend**: React (Vite)
-- **State Management**: Redux
-- **Routing**: React Router
-- **Backend**: Firebase (Auth, Firestore)
-- **Styling**: Tailwind CSS
-- **Animation**: Framer Motion
+This repository contains a web application built with React, Vite, and Firebase. It provides a platform for listing and browsing items for rent.
 
+## Getting Started
 
-## Main Routes
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## Features
+
+- Browse and list items for rent
+- User authentication
+- Responsive design
+
+## License
+
+See LICENSE file for details.
 
 - **Home**: `/` - RentEase landing page
 - **Browse Rentals**: `/browse` - Explore all available rentals (houses, vehicles, electronics, etc.)
